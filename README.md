@@ -1,120 +1,104 @@
-🧠 LexiMind AI — RAG-Based Research Copilot
+LexiMind AI – RAG-Based Research Copilot
+LexiMind AI is a hybrid research assistant that accelerates the information-gathering process by combining real-time web search, document parsing (PDF), and Large Language Models (LLMs).
 
-A Hybrid AI Research Assistant that combines Web Search + PDF Intelligence + LLM Reasoning to generate structured, citation-style research answers with downloadable reports.
+Unlike standard chatbots that rely solely on pre-trained knowledge, LexiMind utilizes a Retrieval-Augmented Generation (RAG) pipeline to fetch relevant context first, ensuring responses are accurate, grounded, and structurally formatted for research workflows.
 
-🚀 What is this project?
+📌 Overview
+This system simulates a real-world AI research workflow:
 
-LexiMind AI is an intelligent research copilot that helps users get well-structured, context-aware answers by combining:
+Ingest: Takes a user query and optional PDF documents.
 
-🌐 Real-time web search (DuckDuckGo)
-📄 PDF document understanding (RAG pipeline)
-🧠 Vector-based semantic retrieval (FAISS)
-🤖 LLM reasoning (DeepSeek via OpenRouter)
-📥 Auto-generated PDF reports
+Retrieve: Extracts text, chunks it, and performs semantic search via FAISS alongside real-time web search.
 
-Instead of just giving chatbot responses, LexiMind behaves like a mini research engine that gathers, filters, and synthesizes information.
+Synthesize: Passes the augmented context to an LLM to generate a structured, factual response.
 
-🎯 Why I built this
+Export: Allows users to download the final analysis as a formatted PDF report.
 
-Most chatbots either:
+✨ Key Features
+Hybrid RAG Pipeline: Seamlessly merges web search results with local document retrieval for comprehensive context.
 
-only use static training data ❌
-or don’t understand user documents properly ❌
+Document Understanding: Automatically extracts, chunks, and embeds text from user-uploaded PDFs using FAISS and Sentence Transformers.
 
-I wanted to build something closer to real-world tools like Perplexity AI / NotebookLM, where:
+Context-Aware Synthesis: Prevents AI hallucinations by forcing the LLM to generate answers strictly based on the retrieved vector embeddings.
 
-AI doesn’t just answer — it researches before answering.
+Automated Report Generation: Converts the final AI output into a clean, downloadable PDF report (via ReportLab) for offline use.
 
-⚙️ Key Features
-🔍 Hybrid RAG System
-Combines PDF knowledge + web search + LLM reasoning
-Context-aware responses using semantic retrieval
-📄 PDF Intelligence
-Upload any document
-Extracts + chunks text automatically
-Uses FAISS for fast similarity search
-🌐 Real-Time Web Research
-Fetches live information from the web
-Improves accuracy with up-to-date context
-🧠 LLM-Powered Reasoning
-Uses DeepSeek via OpenRouter API
-Structured, human-like research answers
-📊 Smart Response Formatting
+Interactive UI: A lightweight, responsive frontend built with Streamlit for rapid prototyping and easy interaction.
 
-Each answer includes:
+🏗️ Architecture & Workflow
+User Query 
+ ├──> Web Search (DuckDuckGo API for real-time context)
+ └──> Document Upload (PDF)
+       └──> Text Extraction -> Chunking -> FAISS Vector Store
+              └──> Similarity Search (Semantic Retrieval)
+                      │
+                      V
+             Context Assembly
+                      │
+                      V
+           OpenRouter (DeepSeek LLM)
+                      │
+                      V
+         Structured Final Response 
+         (Optional: Export to PDF)
 
-Summary
-Detailed explanation
-Key insights
-Source references
-📥 Downloadable Reports
-Generates professional PDF reports
-Useful for assignments, research work, or documentation
-💻 Interactive UI
-Built with Streamlit
-Clean chat-like interface
-Fast experimentation workflow
-🏗️ System Architecture
-User Query
-   ↓
-Web Search ─────┐
-                ├── Context Fusion ──→ LLM (DeepSeek)
-PDF (FAISS) ────┘
-   ↓
-Final Structured Answer
-   ↓
-PDF Report Generator
-🧰 Tech Stack
-Python
-Streamlit (UI)
-FAISS (Vector Search)
-SentenceTransformers (Embeddings)
-DuckDuckGo Search API
-OpenRouter API (DeepSeek LLM)
-ReportLab (PDF generation)
-PyTorch / Transformers
-📦 Installation
-git clone https://github.com/your-username/leximind-ai.git
+🛠️ Tech Stack
+Language: Python
+
+Frontend: Streamlit
+
+Vector Database: FAISS (Facebook AI Similarity Search)
+
+Embeddings: Sentence Transformers
+
+LLM Provider: OpenRouter (DeepSeek)
+
+APIs & Utilities: DuckDuckGo Search API, ReportLab (PDF generation)
+
+🚀 Getting Started
+Prerequisites
+Python 3.8+
+
+An active OpenRouter API Key
+
+Installation
+Clone the repository:
+
+Bash
+git clone https://github.com/jagtappranav2721-cpu/leximind-ai.git
 cd leximind-ai
+Install dependencies:
 
+Bash
 pip install -r requirements.txt
-🔐 Environment Variables
+Configure Environment Variables:
+Create a .env file in the root directory and add your OpenRouter API key:
 
-Create a .env file:
-
+Code snippet
 OPENROUTER_API_KEY=your_api_key_here
-▶️ Run the App
+Run the application:
+
+Bash
 streamlit run app.py
-💡 Example Use Cases
-📚 Academic research summaries
-🧾 Assignment/report generation
-🔍 Fast topic understanding
-📄 PDF-based Q&A
-🌐 Real-time web research assistant
-📊 What makes this different?
+🎯 Use Cases
+Academic & Technical Research: Quickly synthesize information from multiple research papers.
 
-Unlike basic chatbots, LexiMind AI:
+Document Q&A: Chat directly with heavy PDF manuals or reports.
 
-✔ Uses real retrieval (not just prompts)
-✔ Grounds answers in documents + web data
-✔ Produces structured research outputs
-✔ Generates downloadable reports
-✔ Works like a mini AI research engine
+Automated Briefings: Generate rapid, well-researched summaries on current events or specific topics.
 
-📌 Future Improvements
-Streaming response UI (ChatGPT-like typing)
-Multi-document RAG support
-Citation linking with sources
-FastAPI backend upgrade
-React frontend (production UI)
-User authentication system
+🗺️ Roadmap
+[ ] Streaming Responses: Implement token-by-token streaming for lower perceived latency.
+
+[ ] Multi-Document Support: Allow batch uploading and querying across multiple PDFs simultaneously.
+
+[ ] Citation Tracking: Map LLM claims back to specific chunks/pages in the source document.
+
+[ ] Advanced Retrieval: Implement hybrid search (keyword + semantic) for better source ranking.
+
+[ ] UI Overhaul: Migrate the frontend to a React/Next.js stack for enhanced state management and component design.
+
 👨‍💻 Author
+Pranav Jagtap GitHub: jagtappranav2721-cpu
 
-Pranav Jagtap
-
-GitHub: https://github.com/jagtappranav2721-cpu
-LinkedIn: www.linkedin.com/in/pranav-jagtap-065b39345
-Email: jagtappranav2721@gmail.com
-⭐ If you like this project
-
-Give it a ⭐ on GitHub — it helps a lot!
+         
